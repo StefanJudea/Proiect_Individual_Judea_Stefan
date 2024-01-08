@@ -1,19 +1,7 @@
-<?php 
+<?php
 session_start();
 error_reporting(0);
 include('includes/config.php');
-if(strlen($_SESSION['login'])==0)
-    {   
-header('location:login.php');
-}
-else{
-	if (isset($_POST['submit'])) {
-
-		mysqli_query($con,"update orders set 	paymentMethod='".$_POST['paymethod']."' where userId='".$_SESSION['id']."' and paymentMethod is null ");
-		unset($_SESSION['cart']);
-		header('location:order-history.php');
-
-	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +15,12 @@ else{
 	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
 	    <meta name="robots" content="all">
 
-	    <title>Shopping Portal | Payment Method</title>
+	    <title>Track Orders</title>
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="assets/css/main.css">
 	    <link rel="stylesheet" href="assets/css/green.css">
 	    <link rel="stylesheet" href="assets/css/owl.carousel.css">
 		<link rel="stylesheet" href="assets/css/owl.transitions.css">
-		<!--<link rel="stylesheet" href="assets/css/owl.theme.css">-->
 		<link href="assets/css/lightbox.css" rel="stylesheet">
 		<link rel="stylesheet" href="assets/css/animate.min.css">
 		<link rel="stylesheet" href="assets/css/rateit.css">
@@ -50,18 +37,24 @@ else{
 	</head>
     <body class="cnt-home">
 	
-		
 <header class="header-style-1">
+
+	<!-- ============================================== TOP MENU ============================================== -->
 <?php include('includes/top-header.php');?>
+<!-- ============================================== TOP MENU : END ============================================== -->
 <?php include('includes/main-header.php');?>
+	<!-- ============================================== NAVBAR ============================================== -->
 <?php include('includes/menu-bar.php');?>
+<!-- ============================================== NAVBAR : END ============================================== -->
+
 </header>
+<!-- ============================================== HEADER : END ============================================== -->
 <div class="breadcrumb">
 	<div class="container">
 		<div class="breadcrumb-inner">
 			<ul class="list-inline list-unstyled">
 				<li><a href="home.html">Home</a></li>
-				<li class='active'>Payment Method</li>
+				<li class='active'>Track your orders</li>
 			</ul>
 		</div><!-- /.breadcrumb-inner -->
 	</div><!-- /.container -->
@@ -69,52 +62,30 @@ else{
 
 <div class="body-content outer-top-bd">
 	<div class="container">
-		<div class="checkout-box faq-page inner-bottom-sm">
+		<div class="track-order-page inner-bottom-sm">
 			<div class="row">
 				<div class="col-md-12">
-					<h2>Choose Payment Method</h2>
-					<div class="panel-group checkout-steps" id="accordion">
-						<!-- checkout-step-01  -->
-<div class="panel panel-default checkout-step-01">
-
-	<!-- panel-heading -->
-		<div class="panel-heading">
-    	<h4 class="unicase-checkout-title">
-	        <a data-toggle="collapse" class="" data-parent="#accordion" href="#collapseOne">
-	         Select your Payment Method
-	        </a>
-	     </h4>
-    </div>
-    <!-- panel-heading -->
-
-	<div id="collapseOne" class="panel-collapse collapse in">
-
-		<!-- panel-body  -->
-	    <div class="panel-body">
-	    <form name="payment" method="post">
-	    <input type="radio" name="paymethod" value="COD" checked="checked"> COD
-	     <input type="radio" name="paymethod" value="Internet Banking"> Internet Banking
-	     <input type="radio" name="paymethod" value="Debit / Credit card"> Debit / Credit card <br /><br />
-	     <input type="submit" value="submit" name="submit" class="btn btn-primary">
-	    	
-
-	    </form>		
+	<h2>Track your Order</h2>
+	<span class="title-tag inner-top-vs">Please enter your Order ID in the box below and press Enter. This was given to you on your receipt and in the confirmation email you should have received. </span>
+	<form class="register-form outer-top-xs" role="form" method="post" action="order-details.php">
+		<div class="form-group">
+		    <label class="info-title" for="exampleOrderId1">Order ID</label>
+		    <input type="text" class="form-control unicase-form-control text-input" name="orderid" id="exampleOrderId1" >
 		</div>
-		<!-- panel-body  -->
-
-	</div><!-- row -->
-</div>
-<!-- checkout-step-01  -->
-					  
-					  	
-					</div><!-- /.checkout-steps -->
-				</div>
-			</div><!-- /.row -->
-		</div><!-- /.checkout-box -->
+	  	<div class="form-group">
+		    <label class="info-title" for="exampleBillingEmail1">Registered Email</label>
+		    <input type="email" class="form-control unicase-form-control text-input" name="email" id="exampleBillingEmail1" >
+		</div>
+	  	<button type="submit" name="submit" class="btn-upper btn btn-primary checkout-page-button">Track</button>
+	</form>	
+</div>			</div><!-- /.row -->
+		</div><!-- /.sigin-in-->
 		<!-- ============================================== BRANDS CAROUSEL ============================================== -->
+<div 
+
 <?php echo include('includes/brands-slider.php');?>
-<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->	</div><!-- /.container -->
-</div><!-- /.body-content -->
+</div>
+</div>
 <?php include('includes/footer.php');?>
 	<script src="assets/js/jquery-1.11.1.min.js"></script>
 	
@@ -155,4 +126,3 @@ else{
 
 </body>
 </html>
-<?php } ?>
